@@ -1,0 +1,30 @@
+package com.jsp.E_Commerce_project.dto.address;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+
+@Data
+public class CreateAddressRequestDto {
+
+    @NotBlank(message = "Street is required")
+    private String street;
+
+    @NotBlank(message = "City is required")
+    private String city;
+
+    @NotBlank(message = "State is required")
+    private String state;
+
+    @NotBlank(message = "Pincode is required")
+    @Pattern(regexp = "\\d{6}",
+            message = "Pincode must contain 6 digits")
+    private String pincode;
+
+    @NotBlank(message = "Country is required")
+    private String country;
+
+//    private boolean isDefault;
+
+}
