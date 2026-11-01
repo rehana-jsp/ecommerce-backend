@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
 
-    private final HttpRequest request;
 
-    @ExceptionHandler({UserNotFound.class})
-    public ResponseEntity<ResponseStructure<String>> handle(NotFound ex){
-        ex.printStackTrace();
-        ResponseStructure<String> responseStructure=new ResponseStructure<>();
-        responseStructure.setPath(request.getURI().getPath());
+    @ExceptionHandler(UserNotFound.class)
+    public ResponseEntity<ResponseStructure<String>> handleUserNotFound(
+            UserNotFound ex, HttpServletRequest request) {
+
+        log.error("User not found: {}", ex.getMessage(), ex);
+
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setPath(request.getRequestURI());
         responseStructure.setMessage(ex.getMessage());
-        responseStructure.setMessage("error");
         responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseStructure);
-
     }
 }

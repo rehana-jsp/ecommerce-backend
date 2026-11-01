@@ -33,21 +33,20 @@ public class AddressController {
     }
 
 
-    @PutMapping
-    public CreateAddressResponseDto updateAddress(Long addressId, CreateAddressRequestDto request) {
-        return null;
+    @PutMapping("/{addressId}/addressId")
+    public ResponseEntity<CreateAddressResponseDto> updateAddress(@PathVariable Long addressId,@RequestBody CreateAddressRequestDto request) {
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.updateAddress(addressId, request));
     }
 
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteAddress(Long addressId) {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(addressService.deleteAddress(addressId));
+    @DeleteMapping("/{addressId}/addressId")
+    public ResponseEntity<String> deleteAddress(@PathVariable Long addressId) {
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.deleteAddress(addressId));
     }
 
 
-    @PatchMapping
-    public CreateAddressResponseDto markDefaultAddress(Long addressId) {
-
-        return null;
+    @PatchMapping("/{addressId}/addressId")
+    public ResponseEntity<CreateAddressResponseDto> markDefaultAddress(@PathVariable Long addressId) {
+        return ResponseEntity.status(HttpStatus.OK).body(addressService.markDefaultAddress(addressId));
     }
 }

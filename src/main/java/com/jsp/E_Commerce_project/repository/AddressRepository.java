@@ -14,7 +14,9 @@ public interface AddressRepository
 
     Optional<Address> findByIdAndUserId(Long id, Long userId);
 
-    Optional<Address> findFirstByUserIdAndIsDefaultTrue(Long userId);
+    Optional<Address> findByUserIdAndIsDefaultTrue(Long userId);
 
     boolean existsByUserId(Long userId);
+
+    int countByUserIdAndIsDefaultTrue(Long userId);
 }
